@@ -22,6 +22,7 @@ const customStyles = {
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
+  const [checkedItems, setCheckedItems] = useState<string[]>([]);
 
   function openModal() {
     setModalOpen(true);
@@ -33,6 +34,15 @@ export default function Home() {
 
   const handleClick = (item: string) => {
     setSelectedItem(item);
+  };
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    if (event.target.checked) {
+      setCheckedItems([...checkedItems, value]);
+    } else {
+      setCheckedItems(checkedItems.filter((item) => item !== value));
+    }
   };
 
   const isActive = (item: string) => {
@@ -47,57 +57,32 @@ export default function Home() {
     return selectedItem === item;
   };
 
+  const options: { [key: string]: string[] } = {
+    facility: ["施設A", "施設B", "施設C"],
+    tokyo: ["東京都A", "東京都B", "東京都C"],
+    kanagawa: ["神奈川県A", "神奈川県B", "神奈川県C"],
+    chiba: ["千葉県A", "千葉県B", "千葉県C"],
+    saitama: ["埼玉県A", "埼玉県B", "埼玉県C"],
+    workstyle: ["フルタイム", "パートタイム", "リモートワーク"],
+  };
+
   const renderContent = () => {
-    switch (selectedItem) {
-      case "facility":
-        return (
-          <div>
-            <label>
-              <input type="checkbox" /> 施設A
+    return (
+      <div>
+        {selectedItem &&
+          options[selectedItem] &&
+          options[selectedItem].map((option, index) => (
+            <label key={index}>
+              <input
+                type="checkbox"
+                value={option}
+                onChange={handleCheckboxChange}
+              />
+              {option}
             </label>
-            <label>
-              <input type="checkbox" /> 施設B
-            </label>
-            <label>
-              <input type="checkbox" /> 施設C
-            </label>
-          </div>
-        );
-      case "location":
-      case "tokyo":
-      case "kanagawa":
-      case "chiba":
-      case "saitama":
-        return (
-          <div>
-            <label>
-              <input type="checkbox" /> 地域A
-            </label>
-            <label>
-              <input type="checkbox" /> 地域B
-            </label>
-            <label>
-              <input type="checkbox" /> 地域C
-            </label>
-          </div>
-        );
-      case "workstyle":
-        return (
-          <div>
-            <label>
-              <input type="checkbox" /> フルタイム
-            </label>
-            <label>
-              <input type="checkbox" /> パートタイム
-            </label>
-            <label>
-              <input type="checkbox" /> リモートワーク
-            </label>
-          </div>
-        );
-      default:
-        return <div>選択してください</div>;
-    }
+          ))}
+      </div>
+    );
   };
 
   return (
@@ -133,10 +118,9 @@ export default function Home() {
             <h3
               className={`pt-2.5 pb-2.5 pl-7.5 relative hover:cursor-pointer hover:bg-[#f3f3f3] ${
                 isActive("location")
-                  ? "text-custom-red font-bold after:content-[''] after:block after:border-r-4 after:border-custom-red after:absolute after:right-0 after:top-0 after:bottom-0"
+                  ? "text-custom-red "
                   : "hover:after:content-[''] hover:after:block hover:after:border-r-4 hover:after:border-custom-red hover:after:absolute hover:after:right-0 hover:after:top-0 hover:after:bottom-0"
               }`}
-              onClick={() => handleClick("location")}
             >
               勤務地を選択
             </h3>
@@ -176,7 +160,9 @@ export default function Home() {
         </div>
         <div className="flex items-center justify-between border-t-2 pt-4">
           <div className="border-dashed border-2 rounded p-4 flex-grow h-24 mr-4">
-            点線の箱の内容
+            {checkedItems.map((item, index) => (
+              <div key={index}>{item}</div>
+            ))}
           </div>
           <button
             onClick={closeModal}
