@@ -24,7 +24,7 @@ const customStyles = {
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<string | null>(null);
+  const [selectedItem, setSelectedItem] = useState<string | null>("facility");
   const [checkedItems, setCheckedItems] = useState<string[]>([]);
 
   function openModal() {
