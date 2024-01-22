@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import CloseIcon from "@mui/icons-material/Close";
+import { OtherHouses, LocationOn, FactCheck } from "@mui/icons-material";
 import CheckedItemsDisplay from "./components/CheckedItemsDisplay";
 import Sidebar from "./components/Sidebar";
 
@@ -32,6 +33,47 @@ export default function Home() {
 
   function closeModal() {
     setModalOpen(false);
+  }
+
+  function getTitle() {
+    const locationItems = ["tokyo", "chiba", "saitama", "kanagawa"];
+    if (selectedItem === null) {
+      return (
+        <div className="flex items-center">
+          <OtherHouses />
+          <p className="pl-2">施設形態</p>
+        </div>
+      ); // selectedItemがnullの場合のデフォルトタイトル
+    }
+    if (selectedItem === "facility") {
+      return (
+        <div className="flex items-center">
+          <OtherHouses />
+          <p className="pl-2">施設形態</p>
+        </div>
+      );
+    } else if (locationItems.includes(selectedItem)) {
+      return (
+        <div className="flex items-center">
+          <LocationOn />
+          <p className="pl-2">勤務地</p>
+        </div>
+      );
+    } else if (selectedItem === "workstyle") {
+      return (
+        <div className="flex items-center">
+          <FactCheck />
+          <p className="pl-2">働き方</p>
+        </div>
+      );
+    } else {
+      return (
+        <div className="flex items-center">
+          <OtherHouses />
+          <p className="pl-2">施設形態</p>
+        </div>
+      ); // その他の場合のデフォルトタイトル
+    }
   }
 
   function handleClick(item: string) {
@@ -110,7 +152,7 @@ export default function Home() {
         style={customStyles}
       >
         <div className="flex items-center justify-between px-7 py-3 text-custom-blue font-bold">
-          <h2>施設形態</h2>
+          <h2>{getTitle()}</h2>
           <CloseIcon onClick={closeModal} />
         </div>
         <div className="flex">
