@@ -36,7 +36,6 @@ export default function Home() {
   };
 
   const isActive = (item: string) => {
-    // 地域が選択された場合も「勤務地を選択」をアクティブにする
     const regions = ["tokyo", "kanagawa", "chiba", "saitama"];
     if (
       item === "location" &&
@@ -46,6 +45,59 @@ export default function Home() {
       return true;
     }
     return selectedItem === item;
+  };
+
+  const renderContent = () => {
+    switch (selectedItem) {
+      case "facility":
+        return (
+          <div>
+            <label>
+              <input type="checkbox" /> 施設A
+            </label>
+            <label>
+              <input type="checkbox" /> 施設B
+            </label>
+            <label>
+              <input type="checkbox" /> 施設C
+            </label>
+          </div>
+        );
+      case "location":
+      case "tokyo":
+      case "kanagawa":
+      case "chiba":
+      case "saitama":
+        return (
+          <div>
+            <label>
+              <input type="checkbox" /> 地域A
+            </label>
+            <label>
+              <input type="checkbox" /> 地域B
+            </label>
+            <label>
+              <input type="checkbox" /> 地域C
+            </label>
+          </div>
+        );
+      case "workstyle":
+        return (
+          <div>
+            <label>
+              <input type="checkbox" /> フルタイム
+            </label>
+            <label>
+              <input type="checkbox" /> パートタイム
+            </label>
+            <label>
+              <input type="checkbox" /> リモートワーク
+            </label>
+          </div>
+        );
+      default:
+        return <div>選択してください</div>;
+    }
   };
 
   return (
@@ -120,12 +172,7 @@ export default function Home() {
               働き方を選択
             </h3>
           </div>
-          <div className="p-3 w-2/3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
-            quod cumque commodi quis, sapiente mollitia. Earum dolor veritatis
-            iste dicta? Mollitia vel ullam adipisci officia fuga dolores eveniet
-            quae placeat.
-          </div>
+          <div className="p-3 w-2/3">{renderContent()}</div>
         </div>
         <button
           onClick={closeModal}
