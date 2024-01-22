@@ -12,7 +12,7 @@ const CheckedItemsDisplay = ({
   onClearAll,
 }: CheckedItemsDisplayProps) => {
   return (
-    <div className="border-dashed border-2 rounded p-4 flex-grow h-24 mr-4 flex flex-wrap">
+    <div className="border-dashed border-2 rounded-md	 p-4 flex-grow h-24 ml-2 mr-4 flex flex-wrap">
       {checkedItems.map((item, index) => (
         <div key={index} className="flex items-center border p-1 m-1">
           {item}
