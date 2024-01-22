@@ -174,12 +174,17 @@ export default function Home() {
           </div>
           <div className="p-3 w-2/3">{renderContent()}</div>
         </div>
-        <button
-          onClick={closeModal}
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
-        >
-          検索する
-        </button>
+        <div className="flex items-center justify-between border-t-2 pt-4">
+          <div className="border-dashed border-2 rounded p-4 flex-grow h-24 mr-4">
+            点線の箱の内容
+          </div>
+          <button
+            onClick={closeModal}
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full self-center"
+          >
+            検索する
+          </button>
+        </div>
       </Modal>
     </main>
   );
