@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckedItemsDisplay from "./components/CheckedItemsDisplay";
@@ -34,40 +34,37 @@ export default function Home() {
     setModalOpen(false);
   }
 
-  const handleClick = (item: string) => {
+  function handleClick(item: string) {
     if (item !== selectedItem) {
       setSelectedItem(item);
     }
-  };
+  }
 
-  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  function handleCheckboxChange(event: React.ChangeEvent<HTMLInputElement>) {
     const value = event.target.value;
     if (event.target.checked) {
       setCheckedItems([...checkedItems, value]);
     } else {
       setCheckedItems(checkedItems.filter((item) => item !== value));
     }
-  };
+  }
 
-  const handleItemRemove = (itemToRemove: string) => {
+  function handleItemRemove(itemToRemove: string) {
     setCheckedItems(checkedItems.filter((item) => item !== itemToRemove));
-  };
+  }
 
-  const handleClearAll = () => {
+  function handleClearAll() {
     setCheckedItems([]);
-  };
+  }
 
-  const isActive = (item: string) => {
+  function isActive(item: string) {
     const regions = ["tokyo", "kanagawa", "chiba", "saitama"];
-    if (
-      item === "location" &&
+    return item === "location" &&
       selectedItem !== null &&
       regions.includes(selectedItem)
-    ) {
-      return true;
-    }
-    return selectedItem === item;
-  };
+      ? true
+      : selectedItem === item;
+  }
 
   const options: { [key: string]: string[] } = {
     facility: ["施設A", "施設B", "施設C"],
@@ -78,7 +75,7 @@ export default function Home() {
     workstyle: ["フルタイム", "パートタイム", "リモートワーク"],
   };
 
-  const renderContent = () => {
+  function renderContent() {
     return (
       <div>
         {selectedItem &&
@@ -96,7 +93,7 @@ export default function Home() {
           ))}
       </div>
     );
-  };
+  }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -109,7 +106,7 @@ export default function Home() {
 
       <Modal
         isOpen={modalOpen}
-        onRequestClose={() => setModalOpen(false)}
+        onRequestClose={closeModal}
         style={customStyles}
       >
         <div className="flex items-center justify-between px-7 py-3 text-custom-blue font-bold">
