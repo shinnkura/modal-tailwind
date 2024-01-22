@@ -35,7 +35,6 @@ export default function Home() {
   const handleClick = (item: string) => {
     if (item !== selectedItem) {
       setSelectedItem(item);
-      // チェックボックスの状態をリセットするが、点線の箱の内容は保持する
     }
   };
 
@@ -46,6 +45,14 @@ export default function Home() {
     } else {
       setCheckedItems(checkedItems.filter((item) => item !== value));
     }
+  };
+
+  const handleItemRemove = (itemToRemove: string) => {
+    setCheckedItems(checkedItems.filter((item) => item !== itemToRemove));
+  };
+
+  const handleClearAll = () => {
+    setCheckedItems([]);
   };
 
   const isActive = (item: string) => {
@@ -163,10 +170,18 @@ export default function Home() {
           <div className="p-3 w-2/3">{renderContent()}</div>
         </div>
         <div className="flex items-center justify-between border-t-2 pt-4">
-          <div className="border-dashed border-2 rounded p-4 flex-grow h-24 mr-4">
+          <div className="border-dashed border-2 rounded p-4 flex-grow h-24 mr-4 flex flex-wrap">
             {checkedItems.map((item, index) => (
-              <div key={index}>{item}</div>
+              <div key={index} className="flex items-center border p-1 m-1">
+                {item}
+                <button onClick={() => handleItemRemove(item)} className="ml-2">
+                  X
+                </button>
+              </div>
             ))}
+            <button onClick={handleClearAll} className="ml-auto">
+              すべてクリア
+            </button>
           </div>
           <button
             onClick={closeModal}
