@@ -22,7 +22,6 @@ const customStyles = {
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
-  // const [isActive, setIsActive] = useState(false);
 
   function openModal() {
     setModalOpen(true);
@@ -37,6 +36,15 @@ export default function Home() {
   };
 
   const isActive = (item: string) => {
+    // 地域が選択された場合も「勤務地を選択」をアクティブにする
+    const regions = ["tokyo", "kanagawa", "chiba", "saitama"];
+    if (
+      item === "location" &&
+      selectedItem !== null &&
+      regions.includes(selectedItem)
+    ) {
+      return true;
+    }
     return selectedItem === item;
   };
 
@@ -61,63 +69,51 @@ export default function Home() {
         <div className="flex">
           <div className="w-1/3 border-r-2">
             <h3
-              className={`pt-2.5 pb-2.5 pl-7.5 relative ${
+              className={`pt-2.5 pb-2.5 pl-7.5 relative hover:cursor-pointer hover:bg-[#f3f3f3] ${
                 isActive("facility")
                   ? "text-custom-red font-bold after:content-[''] after:block after:border-r-4 after:border-custom-red after:absolute after:right-0 after:top-0 after:bottom-0"
-                  : ""
+                  : "hover:after:content-[''] hover:after:block hover:after:border-r-4 hover:after:border-custom-red hover:after:absolute hover:after:right-0 hover:after:top-0 hover:after:bottom-0"
               }`}
               onClick={() => handleClick("facility")}
             >
               施設形態を選択
             </h3>
-            <h3 className="pt-2.5 pb-2.5 pl-7.5 relative">勤務地を選択</h3>
+            <h3
+              className={`pt-2.5 pb-2.5 pl-7.5 relative hover:cursor-pointer hover:bg-[#f3f3f3] ${
+                isActive("location")
+                  ? "text-custom-red font-bold after:content-[''] after:block after:border-r-4 after:border-custom-red after:absolute after:right-0 after:top-0 after:bottom-0"
+                  : "hover:after:content-[''] hover:after:block hover:after:border-r-4 hover:after:border-custom-red hover:after:absolute hover:after:right-0 hover:after:top-0 hover:after:bottom-0"
+              }`}
+              onClick={() => handleClick("location")}
+            >
+              勤務地を選択
+            </h3>
             <ul className="pt-2.5 pb-2.5 pl-7.5">
-              <li
-                className={`pt-2.5 pb-2.5 pl-7.5 relative ${
-                  isActive("tokyo")
-                    ? "text-custom-red font-bold after:content-[''] after:block after:border-r-4 after:border-custom-red after:absolute after:right-0 after:top-0 after:bottom-0"
-                    : ""
-                }`}
-                onClick={() => handleClick("tokyo")}
-              >
-                東京都
-              </li>
-              <li
-                className={`pt-2.5 pb-2.5 pl-7.5 relative ${
-                  isActive("kanagawa")
-                    ? "text-custom-red font-bold after:content-[''] after:block after:border-r-4 after:border-custom-red after:absolute after:right-0 after:top-0 after:bottom-0"
-                    : ""
-                }`}
-                onClick={() => handleClick("kanagawa")}
-              >
-                神奈川県
-              </li>
-              <li
-                className={`pt-2.5 pb-2.5 pl-7.5 relative ${
-                  isActive("chiba")
-                    ? "text-custom-red font-bold after:content-[''] after:block after:border-r-4 after:border-custom-red after:absolute after:right-0 after:top-0 after:bottom-0"
-                    : ""
-                }`}
-                onClick={() => handleClick("chiba")}
-              >
-                千葉県
-              </li>
-              <li
-                className={`pt-2.5 pb-2.5 pl-7.5 relative ${
-                  isActive("saitama")
-                    ? "text-custom-red font-bold after:content-[''] after:block after:border-r-4 after:border-custom-red after:absolute after:right-0 after:top-0 after:bottom-0"
-                    : ""
-                }`}
-                onClick={() => handleClick("saitama")}
-              >
-                埼玉県
-              </li>
+              {["tokyo", "kanagawa", "chiba", "saitama"].map((region) => (
+                <li
+                  key={region}
+                  className={`pt-2.5 pb-2.5 pl-7.5 relative hover:cursor-pointer hover:bg-[#f3f3f3] ${
+                    isActive(region)
+                      ? "text-custom-red font-bold after:content-[''] after:block after:border-r-4 after:border-custom-red after:absolute after:right-0 after:top-0 after:bottom-0"
+                      : "hover:after:content-[''] hover:after:block hover:after:border-r-4 hover:after:border-custom-red hover:after:absolute hover:after:right-0 hover:after:top-0 hover:after:bottom-0"
+                  }`}
+                  onClick={() => handleClick(region)}
+                >
+                  {region === "tokyo"
+                    ? "東京都"
+                    : region === "kanagawa"
+                    ? "神奈川県"
+                    : region === "chiba"
+                    ? "千葉県"
+                    : "埼玉県"}
+                </li>
+              ))}
             </ul>
             <h3
-              className={`pt-2.5 pb-2.5 pl-7.5 relative ${
+              className={`pt-2.5 pb-2.5 pl-7.5 relative hover:cursor-pointer hover:bg-[#f3f3f3] ${
                 isActive("workstyle")
                   ? "text-custom-red font-bold after:content-[''] after:block after:border-r-4 after:border-custom-red after:absolute after:right-0 after:top-0 after:bottom-0"
-                  : ""
+                  : "hover:after:content-[''] hover:after:block hover:after:border-r-4 hover:after:border-custom-red hover:after:absolute hover:after:right-0 hover:after:top-0 hover:after:bottom-0"
               }`}
               onClick={() => handleClick("workstyle")}
             >
