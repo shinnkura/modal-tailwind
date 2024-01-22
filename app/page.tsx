@@ -33,7 +33,10 @@ export default function Home() {
   }
 
   const handleClick = (item: string) => {
-    setSelectedItem(item);
+    if (item !== selectedItem) {
+      setSelectedItem(item);
+      // チェックボックスの状態をリセットするが、点線の箱の内容は保持する
+    }
   };
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,6 +79,7 @@ export default function Home() {
               <input
                 type="checkbox"
                 value={option}
+                checked={checkedItems.includes(option)}
                 onChange={handleCheckboxChange}
               />
               {option}
