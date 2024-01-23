@@ -5,7 +5,7 @@ interface SidebarProps {
   onClick: (item: string) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isActive, onClick }) => {
+const Sidebar = ({ isActive, onClick }: SidebarProps) => {
   const regions = ["tokyo", "kanagawa", "chiba", "saitama"];
 
   return (
@@ -20,11 +20,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isActive, onClick }) => {
       >
         施設形態を選択
       </h3>
-      <h3
-        className={`pt-2.5 pb-2.5 pl-7.5 relative cursor-pointer ${
-          isActive("location") ? "text-custom-red " : ""
-        }`}
-      >
+      <h3 className={`pt-2.5 pb-2.5 pl-7.5 relative cursor-pointer ${isActive("location") ? "text-custom-red " : ""}`}>
         勤務地を選択
       </h3>
       <ul className="pt-2.5 pb-2.5 pl-7.5">

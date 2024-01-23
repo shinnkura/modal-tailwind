@@ -101,9 +101,7 @@ export default function Home() {
 
   function isActive(item: string) {
     const regions = ["tokyo", "kanagawa", "chiba", "saitama"];
-    return item === "location" &&
-      selectedItem !== null &&
-      regions.includes(selectedItem)
+    return item === "location" && selectedItem !== null && regions.includes(selectedItem)
       ? true
       : selectedItem === item;
   }
@@ -139,18 +137,11 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <button
-        onClick={openModal}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-      >
+      <button onClick={openModal} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
         Open Modal
       </button>
 
-      <Modal
-        isOpen={modalOpen}
-        onRequestClose={closeModal}
-        style={customStyles}
-      >
+      <Modal isOpen={modalOpen} onRequestClose={closeModal} style={customStyles}>
         <div className="flex items-center justify-between px-7 py-3 text-custom-blue font-bold">
           <h2>{getTitle()}</h2>
           <CloseIcon onClick={closeModal} />
