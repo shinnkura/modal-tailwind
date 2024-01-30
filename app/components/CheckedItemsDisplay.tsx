@@ -9,16 +9,18 @@ interface CheckedItemsDisplayProps {
 
 const CheckedItemsDisplay = ({ checkedItems, onItemRemove, onClearAll }: CheckedItemsDisplayProps) => {
   return (
-    <div className="border-dashed border-2 rounded-md	 p-px flex-grow h-24 ml-2 mr-4 flex flex-wrap max-w-[800px]">
+    <div className="border-dashed border-2 rounded-md p-2 flex flex-wrap items-center w-[800px] h-[100px] ml-[20px]">
       {checkedItems.map((item, index) => (
-        <div key={index} className="flex items-center border p-1 m-1 max-h-[30px] rounded bg-gray-100">
+        <div key={index} className="flex items-center border p-1 mr-2 rounded bg-gray-100 ">
           {item}
-          <Clear onClick={() => onItemRemove(item)} />
+          <Clear onClick={() => onItemRemove(item)} className="cursor-pointer" />
         </div>
       ))}
-      <button onClick={onClearAll} className="ml-auto text-[#00aeff]">
-        すべてクリア
-      </button>
+      {checkedItems.length > 0 && (
+        <button onClick={onClearAll} className="text-[#00aeff] ml-2">
+          すべてクリア
+        </button>
+      )}
     </div>
   );
 };
