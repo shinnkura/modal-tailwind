@@ -1,4 +1,5 @@
 import React from "react";
+import SubdirectoryArrowRightIcon from "@mui/icons-material/SubdirectoryArrowRight";
 
 interface SidebarProps {
   isActive: (item: string) => boolean;
@@ -27,13 +28,14 @@ const Sidebar = ({ isActive, onClick }: SidebarProps) => {
         {regions.map((region) => (
           <li
             key={region}
-            className={`pt-2.5 pb-2.5 pl-7.5 relative cursor-pointer ${
+            className={`pt-2.5 pb-2.5 relative cursor-pointer ${
               isActive(region)
                 ? "text-custom-red font-bold after:content-[''] after:block after:border-r-4 after:border-custom-red after:absolute after:right-0 after:top-0 after:bottom-0"
                 : "hover:bg-[#f3f3f3] hover:after:content-[''] hover:after:block hover:after:border-r-4 hover:after:border-custom-red hover:after:absolute hover:after:right-0 hover:after:top-0 hover:after:bottom-0"
             }`}
             onClick={() => onClick(region)}
           >
+            <SubdirectoryArrowRightIcon className="pb-2" />
             {region === "tokyo"
               ? "東京都"
               : region === "kanagawa"
