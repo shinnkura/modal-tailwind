@@ -127,6 +127,7 @@ export default function Home() {
                 value={option}
                 checked={checkedItems.includes(option)}
                 onChange={handleCheckboxChange}
+                className="accent-custom-red"
               />
               {option}
             </label>
@@ -159,7 +160,7 @@ export default function Home() {
           />
           <button
             onClick={closeModal}
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded self-center mr-2"
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-[15px] px-4 rounded self-center w-[150px] mr-[20px]"
           >
             検索する
           </button>
