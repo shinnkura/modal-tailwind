@@ -107,27 +107,41 @@ export default function Home() {
   }
 
   const options: { [key: string]: string[] } = {
-    facility: ["施設A", "施設B", "施設C"],
-    tokyo: ["東京都A", "東京都B", "東京都C"],
-    kanagawa: ["神奈川県A", "神奈川県B", "神奈川県C"],
-    chiba: ["千葉県A", "千葉県B", "千葉県C"],
-    saitama: ["埼玉県A", "埼玉県B", "埼玉県C"],
+    facility: [
+      "認可保育園",
+      "認証・認定保育園",
+      "認可外保育園",
+      "幼稚園",
+      "認定こども園",
+      "企業内保育園",
+      "小規模認可保育園",
+      "企業主導型保育園",
+      "院内保育",
+      "病児保育",
+      "学童保育",
+      "児童発達支援",
+      "放課後等デイサービス",
+    ],
+    tokyo: ["千代田区", "中央区", "港区"],
+    kanagawa: ["横浜市鶴見区", "横浜市神奈川区", "横浜市西区"],
+    chiba: ["千葉市中央区", "千葉市花見川区", "千葉市稲毛区"],
+    saitama: ["さいたま市西区", "さいたま市北区", "さいたま市大宮区"],
     workstyle: ["フルタイム", "パートタイム", "リモートワーク"],
   };
 
   function renderContent() {
     return (
-      <div>
+      <div className="grid grid-cols-2 gap-4 p-[45px]">
         {selectedItem &&
           options[selectedItem] &&
           options[selectedItem].map((option, index) => (
-            <label key={index}>
+            <label key={index} className="w-[200px]">
               <input
                 type="checkbox"
                 value={option}
                 checked={checkedItems.includes(option)}
                 onChange={handleCheckboxChange}
-                className="accent-custom-red"
+                className="accent-custom-red mr-[10px]"
               />
               {option}
             </label>
