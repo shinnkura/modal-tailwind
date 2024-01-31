@@ -174,7 +174,7 @@ export default function Home() {
           />
           <button
             onClick={closeModal}
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-[15px] px-4 rounded self-center w-[150px] mr-4"
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-[15px] px-4 rounded self-center w-[150px] mx-4"
           >
             検索する
           </button>
