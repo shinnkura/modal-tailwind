@@ -6,14 +6,23 @@
   .item {
     @apply flex py-2.5 pl-5 relative;
   }
-  /* .item:hover {
-    @apply bg-[#fff9f4];
-  } */
   .item::after {
     content: "";
     @apply absolute w-1 h-full bg-[rgb(242,86,86)] top-0 right-0 scale-y-0 transition-transform duration-100;
   }
   .item:hover::after {
     @apply scale-y-100;
+  }
+
+  .sidebar-item {
+    @apply pt-2.5 pb-2.5 pl-7.5 relative cursor-pointer;
+  }
+
+  .sidebar-item-active {
+    @apply text-custom-red font-bold after:content-[''] after:block after:border-r-4 after:border-custom-red after:absolute after:right-0 after:top-0 after:bottom-0;
+  }
+
+  .sidebar-item-hover {
+    @apply hover:bg-[#f3f3f3] hover:after:content-[''] hover:after:block hover:after:border-r-4 hover:after:border-custom-red hover:after:absolute hover:after:right-0 hover:after:top-0 hover:after:bottom-0;
   }
 }
