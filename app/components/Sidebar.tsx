@@ -6,23 +6,27 @@ interface SidebarProps {
   onClick: (item: string) => void;
 }
 
+interface SidebarItemProps {
+  label: string;
+  isActive: boolean;
+  onClick: () => void;
+}
+
+const SidebarItem = ({ label, isActive, onClick }: SidebarItemProps) => {
+  return (
+    <h3 className={`sidebar-item ${isActive ? "sidebar-item-active" : "sidebar-item-hover"} item`} onClick={onClick}>
+      {label}
+    </h3>
+  );
+};
+
 const Sidebar = ({ isActive, onClick }: SidebarProps) => {
   const regions = ["tokyo", "kanagawa", "chiba", "saitama"];
 
   return (
     <div className="w-1/3 border-r-2 h-[400px]">
-      <h3
-        className={`sidebar-item ${isActive("facility") ? "sidebar-item-active" : "sidebar-item-hover"} item`}
-        onClick={() => onClick("facility")}
-      >
-        施設形態を選択
-      </h3>
-      <h3
-        className={`sidebar-item ${isActive("location") ? "text-custom-red" : "sidebar-item-hover"} item`}
-        onClick={() => onClick("tokyo")}
-      >
-        勤務地を選択
-      </h3>
+      <SidebarItem label="施設形態を選択" isActive={isActive("facility")} onClick={() => onClick("facility")} />
+      <SidebarItem label="勤務地を選択" isActive={isActive("location")} onClick={() => onClick("tokyo")} />
       <ul className="pt-2.5 pb-2.5 pl-7.5">
         {regions.map((region) => (
           <li
@@ -41,12 +45,7 @@ const Sidebar = ({ isActive, onClick }: SidebarProps) => {
           </li>
         ))}
       </ul>
-      <h3
-        className={`sidebar-item ${isActive("workstyle") ? "sidebar-item-active" : "sidebar-item-hover"} item`}
-        onClick={() => onClick("workstyle")}
-      >
-        働き方を選択
-      </h3>
+      <SidebarItem label="働き方を選択" isActive={isActive("workstyle")} onClick={() => onClick("workstyle")} />
     </div>
   );
 };
