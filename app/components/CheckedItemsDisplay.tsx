@@ -28,7 +28,7 @@ const CheckedItemsDisplay: React.FC<CheckedItemsDisplayProps> = ({ checkedItems,
         </div>
       ))}
       {checkedItems.length > 0 && (
-        <button onClick={onClearAll} className="text-[#00aeff] ml-2">
+        <button onClick={onClearAll} className="text-[#00aeff] pb-2">
           すべてクリア
         </button>
       )}
